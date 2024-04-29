@@ -20,6 +20,7 @@ const TodoPage = () => {
       },
       (e) => {
         console.log(e);
+        console.log("x");
       }
     );
 
