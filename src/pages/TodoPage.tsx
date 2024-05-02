@@ -1,36 +1,55 @@
+import TodosTable from "@/components/TodosTable";
 import TodoForm from "@/forms/TodoForm";
-import { db } from "@/lib/firebase";
-import { Todo } from "@/types";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Member, Todo } from "@/types";
 import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const TodoPage = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [members, setMembers] = useState<Member[]>([]);
+  const [todo, setTodo] = useState<Todo | undefined>(undefined);
 
   useEffect(() => {
-    console.log("i am fetching");
-    const unsubscribe = onSnapshot(
-      collection(db, "todos"),
-      (snapshot) => {
-        const tasksArray: Todo[] = [];
-        snapshot.forEach((doc) => {
-          tasksArray.push(doc.data() as Todo);
-        });
-        setTodos(tasksArray);
-      },
-      (e) => {
-        console.log(e);
-        console.log("x");
-      }
-    );
+    const unsubscribe = onSnapshot(collection(db, "members"), (snapshot) => {
+      const membersArray: Member[] = [];
+      snapshot.forEach((doc) => {
+        membersArray.push({ id: doc.id, ...doc.data() } as Member);
+      });
+      setMembers(membersArray);
+    });
 
-    return () => unsubscribe();
+    return () => unsubscribe && unsubscribe();
   }, []);
 
   return (
     <div>
-      <TodoForm />
-      <div>{todos.length > 0 && JSON.stringify(todos)}</div>
+      <div className="flex flex-row gap-5">
+        <div className="flex-none w-[300px]">
+          <TodoForm
+            members={members}
+            todo={todo}
+            setTodo={() => setTodo(undefined)}
+          />
+        </div>
+        <div className="flex-1">
+          <Card>
+            <CardHeader>
+              <CardTitle>Manage Todos</CardTitle>
+              <CardDescription>This is all your todos</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <TodosTable members={members} onEdit={setTodo} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

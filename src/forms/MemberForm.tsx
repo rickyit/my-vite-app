@@ -22,12 +22,19 @@ import { z } from "zod";
 import { useToast } from "@/components/ui/use-toast";
 import { Member } from "@/types";
 import { useEffect } from "react";
+import zodInputStringPipe from "@/lib/zodInputStringPipe";
 
 // Make a Schema of the form object
 const MemberSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Not a valid email").toLowerCase(),
-  age: z.coerce.number({ message: "Please enter a number" }),
+  age: z.coerce
+    .number({
+      required_error: "Age is required",
+      invalid_type_error: "Age must be a number",
+    })
+    .int("Age must be an integer")
+    .positive("Age must be a positive number"),
 });
 
 // Create the form data type

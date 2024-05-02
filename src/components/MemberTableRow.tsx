@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Member } from "@/types";
-import { Ellipsis, RefreshCw } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -25,9 +25,8 @@ const MemberTableRow = ({ member, onEdit }: Props) => {
   const handleDelete = async () => {
     setIsUpdating(true);
     try {
-      setTimeout(async () => {
-        await useDeleteMember(member.id);
-      }, 2000);
+      await useDeleteMember(member.id);
+
       toast({
         title: "Member Delete",
         description: "A member is deleted to the database",
@@ -39,35 +38,29 @@ const MemberTableRow = ({ member, onEdit }: Props) => {
         description: "Failed to delete member to the database",
       });
     } finally {
-      setTimeout(async () => {
-        setIsUpdating(false);
-      }, 2000);
+      setIsUpdating(false);
     }
   };
 
   return (
     <TableRow key={member.id}>
-      <TableCell className="font-medium">{member.name} </TableCell>
+      <TableCell className="font-medium">{member.name}</TableCell>
       <TableCell>{member.email}</TableCell>
       <TableCell>{member.age}</TableCell>
       <TableCell className="text-right">
-        {isUpdating ? (
-          <RefreshCw className="w-[12px] h-[12px] animate-spin" />
-        ) : (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Ellipsis size={20} />{" "}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => onEdit(member)}>
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Ellipsis size={20} />{" "}
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => onEdit(member)}>
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </TableCell>
     </TableRow>
   );

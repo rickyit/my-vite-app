@@ -35,7 +35,7 @@ const MembersTable = ({ onEdit }: Props) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Name</TableHead>
+            <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Age</TableHead>
             <TableHead className="text-right w-[50px]"></TableHead>
@@ -44,7 +44,7 @@ const MembersTable = ({ onEdit }: Props) => {
         <TableBody>
           {members.length > 0 &&
             members.map((member) => (
-              <MemberTableRow member={member} onEdit={onEdit} />
+              <MemberTableRow key={member.id} member={member} onEdit={onEdit} />
             ))}
         </TableBody>
       </Table>

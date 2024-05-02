@@ -1,7 +1,12 @@
+import { Timestamp } from "firebase/firestore";
+
 export type Todo = {
   id: string;
+  date: Timestamp;
   task: string;
-  completed: boolean;
+  assignee: string;
+  note: string;
+  status: boolean;
 };
 
 export type Member = {
