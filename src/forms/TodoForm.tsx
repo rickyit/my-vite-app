@@ -38,8 +38,6 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
-import { db } from "@/lib/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 
 // Make a Schema of the form object
 const TodoSchema = z.object({
@@ -107,7 +105,7 @@ const TodoForm = ({ members, todo, setTodo }: Props) => {
     <Card>
       <CardHeader>
         <CardTitle>Create a Todo</CardTitle>
-        <CardDescription>Use the form below to add a new Todo</CardDescription>
+        <CardDescription>Use the form below to add a new task</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -118,7 +116,7 @@ const TodoForm = ({ members, todo, setTodo }: Props) => {
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Date of birth</FormLabel>
+                    <FormLabel>Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>

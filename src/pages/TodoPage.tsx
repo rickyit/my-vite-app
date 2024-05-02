@@ -30,15 +30,15 @@ const TodoPage = () => {
 
   return (
     <div>
-      <div className="flex flex-row gap-5">
-        <div className="flex-none w-[300px]">
+      <div className="grid grid-cols-8 gap-5">
+        <div className="col-span-2">
           <TodoForm
             members={members}
             todo={todo}
             setTodo={() => setTodo(undefined)}
           />
         </div>
-        <div className="flex-1">
+        <div className="col-span-6">
           <Card>
             <CardHeader>
               <CardTitle>Manage Todos</CardTitle>

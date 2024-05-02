@@ -1,7 +1,9 @@
+import { useAuth } from "@/auth/AuthContext";
 import React from "react";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  const { currentUser } = useAuth();
+  return <div>{currentUser && JSON.stringify(currentUser)}</div>;
 };
 
 export default HomePage;

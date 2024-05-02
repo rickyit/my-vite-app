@@ -15,11 +15,11 @@ const MembersPage = () => {
 
   return (
     <div>
-      <div className="flex flex-row gap-5">
-        <div className="flex-none w-[300px]">
+      <div className="grid grid-cols-8 gap-5">
+        <div className="col-span-2">
           <MemberForm member={member} setMember={() => setMember(undefined)} />
         </div>
-        <div className="flex-1">
+        <div className="col-span-6">
           <Card>
             <CardHeader>
               <CardTitle>Manage Members</CardTitle>
