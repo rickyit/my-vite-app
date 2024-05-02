@@ -10,7 +10,6 @@ const Layout = ({ children }: Props) => {
     <div>
       <Header />
       <main className="container mx-auto my-4">{children}</main>
-      <footer>Footer Ako</footer>
     </div>
   );
 };

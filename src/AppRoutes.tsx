@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import TodoPage from "./pages/TodoPage";
+import MembersPage from "./pages/MembersPage";
 
 function AppRoutes() {
   return (
@@ -29,6 +30,14 @@ function AppRoutes() {
         element={
           <Layout>
             <ContactPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/members"
+        element={
+          <Layout>
+            <MembersPage />
           </Layout>
         }
       />
