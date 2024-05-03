@@ -11,6 +11,8 @@ const RedirectIfLoggedIn = () => {
   if (currentUser) {
     return <Navigate to="/" />;
   }
+
+  return <Outlet />;
 };
 
 export default RedirectIfLoggedIn;
